@@ -1,13 +1,7 @@
 from enum import Enum
 from typing import Any
 
-
-class SharedParam(Enum):
-    CARNIVORE_EATING = 0
-    CARNIVORE_HUNTING_HERBIVORES = 1
-    CARNIVORE_HUNTING_SCAVENGERS = 2
-    HERBIVORE_DEFENDING = 3
-    HERBIVORES_AVAILABLE = 4
+from .parameters import SharedParam
 
 
 class Predator:
@@ -83,7 +77,7 @@ class Predator:
                 else:
                     self.state = hunt_state
             case self.State.HUNTING_HERBIVORES:
-                if (not input_params.setdefault(sp.HERBIVORE_DEFENDING, False)
+                if (not input_params.setdefault(sp.HERBIVORES_WILL_DEFEND, False)
                         and input_params.setdefault(sp.HERBIVORES_AVAILABLE, False)):
                     self.state = st.EATING
                 else:
@@ -142,7 +136,7 @@ class Predator:
 
     def get_output(self) -> dict[SharedParam, bool]:
         return {
-            SharedParam.CARNIVORE_EATING: self.state == self.State.EATING,
-            SharedParam.CARNIVORE_HUNTING_HERBIVORES: self.state == self.State.HUNTING_HERBIVORES,
-            SharedParam.CARNIVORE_HUNTING_SCAVENGERS: self.state == self.State.HUNTING_SCAVENGERS,
+            SharedParam.PREDATOR_EATING: self.state == self.State.EATING,
+            SharedParam.PREDATOR_HUNTING_HERBIVORES: self.state == self.State.HUNTING_HERBIVORES,
+            SharedParam.PREDATOR_HUNTING_SCAVENGERS: self.state == self.State.HUNTING_SCAVENGERS,
         }
