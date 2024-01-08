@@ -34,10 +34,6 @@ class Manager:
         self.herbivore_history.append(self.herbivore.population)
         self.herbivore_history.pop(0)
 
-        print(
-
-        )
-
     def draw_predators(self, tiled_map: TiledMap):
         st = Predator.State
         aspect_ratio = 1.5

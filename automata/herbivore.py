@@ -29,7 +29,7 @@ class Herbivore:
 
     config: dict[Config, Any] = {
         Config.INITIAL_SATURATION: 100,
-        Config.INITIAL_POPULATION: 10,
+        Config.INITIAL_POPULATION: 30,
         Config.INITIAL_ENERGY: 100,
         Config.INITIAL_STATE: State.SLEEPING,
         Config.AVAILABILITY_THRESHOLD: 15,

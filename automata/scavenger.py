@@ -97,7 +97,7 @@ class Scavenger:
                 self.saturation += 40
                 self.population -= 2
             case self.State.MULTIPLYING:
-                self.population += 8
+                self.population += 5
                 self.energy -= 30
                 self.saturation -= 30
             case self.State.WANDERING:
