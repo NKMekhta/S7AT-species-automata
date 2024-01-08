@@ -84,7 +84,7 @@ class Manager:
             case st.HUNTING_HERBIVORES:
                 tiled_map.draw_at(
                     self.predator_sprite_sheet,
-                    (6, 12), scale, aspect_ratio,
+                    (5, 7), scale, aspect_ratio,
                     pg.Rect(0, 0, width, height),
                 )
             case st.HUNTING_SCAVENGERS:
@@ -130,7 +130,7 @@ class Manager:
             case st.MIGRATING:
                 tiled_map.draw_at(
                     self.herbivore_sprite_sheet,
-                    (4, 11), scale, aspect_ratio,
+                    (3, 13), scale, aspect_ratio,
                     pg.Rect(0, 0, width, height),
                     (True, False)
                 )
@@ -245,6 +245,6 @@ class Manager:
             + f'\n    s: {self.scavenger.saturation}'
             + f'\n    p: {self.scavenger.population}'
         )
-        render = font.render(text, False, (255, 255, 255, 255))
+        render = font.render(text, False, (0, 0, 0, 255))
         dest = Vector2(rect.x, rect.y)
         surface.blit(render, dest)
