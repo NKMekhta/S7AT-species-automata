@@ -79,7 +79,7 @@ class Herbivore:
                 self.saturation += 50
                 self.energy -= 5
             case self.State.SLEEPING:
-                self.energy += 50
+                self.energy += 90
                 self.saturation -= 10
             case self.State.MIGRATING:
                 self.energy -= 5
@@ -101,6 +101,6 @@ class Herbivore:
         ip = self.internal_params
         pp = self.PrivateParam
         return {
-            SharedParam.HERBIVORES_WILL_DEFEND: ip[pp.HAS_ENERGY_TO_DEFEND],
+            SharedParam.HERBIVORES_WILL_DEFEND: self.energy >= 60,
             SharedParam.HERBIVORES_AVAILABLE: self.population >= self.config[self.Config.AVAILABILITY_THRESHOLD],
         }

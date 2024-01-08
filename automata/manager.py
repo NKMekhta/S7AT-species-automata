@@ -51,11 +51,11 @@ class Manager:
             case st.EATING:
                 tiled_map.draw_at(
                     self.meat,
-                    (5.2, 6.8)
+                    (4.2, 5.8)
                 )
                 tiled_map.draw_at(
                     self.predator_sprite_sheet,
-                    (6, 6), scale, aspect_ratio,
+                    (5, 5), scale, aspect_ratio,
                     pg.Rect(0, height, width, height)
                 )
             case st.MULTIPLYING:
@@ -166,11 +166,11 @@ class Manager:
             case st.EATING:
                 tiled_map.draw_at(
                     self.meat,
-                    (5.2, 6.8),
+                    (4.2, 5.8),
                 )
                 tiled_map.draw_at(
                     sprite_sheet,
-                    (6, 6), scale, aspect_ratio,
+                    (5, 5), scale, aspect_ratio,
                     pg.Rect(0, height * 2, width, height),
                 )
             case st.MULTIPLYING:
