@@ -80,8 +80,7 @@ class Predator:
                 else:
                     self.state = hunt_state
             case self.State.HUNTING_HERBIVORES:
-                if (not input_params.setdefault(sp.HERBIVORES_WILL_DEFEND, False)
-                        and input_params.setdefault(sp.HERBIVORES_AVAILABLE, False)):
+                if not input_params.setdefault(sp.HERBIVORES_WILL_DEFEND, False):
                     self.state = st.EATING
                 else:
                     self.state = post_hunt_state

@@ -16,6 +16,7 @@ class Manager:
         self.predator_sprite_sheet = pg.image.load("assets/sprites/trex_states.png").convert_alpha()
         self.herbivore_sprite_sheet = pg.image.load("assets/sprites/triceratops_states.png").convert_alpha()
         self.scavenger_sprite_sheet = pg.image.load("assets/sprites/raptor_states.png").convert_alpha()
+        self.meat = pg.image.load("assets/sprites/anonymous_meat.png").convert_alpha()
         self.scavenger_history = [0] * 16
         self.herbivore_history = [0] * 16
         self.predator_history = [0] * 16
@@ -48,6 +49,10 @@ class Manager:
                     pg.Rect(0, height * 2, width, height)
                 )
             case st.EATING:
+                tiled_map.draw_at(
+                    self.meat,
+                    (5.2, 6.8)
+                )
                 tiled_map.draw_at(
                     self.predator_sprite_sheet,
                     (6, 6), scale, aspect_ratio,
@@ -160,8 +165,12 @@ class Manager:
                 )
             case st.EATING:
                 tiled_map.draw_at(
+                    self.meat,
+                    (5.2, 6.8),
+                )
+                tiled_map.draw_at(
                     sprite_sheet,
-                    (7, 7), scale, aspect_ratio,
+                    (6, 6), scale, aspect_ratio,
                     pg.Rect(0, height * 2, width, height),
                 )
             case st.MULTIPLYING:
