@@ -67,6 +67,12 @@ class Manager:
                 )
             case st.EATING:
                 tiled_map.draw_at(
+                    self.herbivore_sprite_sheet,
+                    (5.2, 7.2), 1.5, 1.5,
+                    pg.Rect(0, height * 3, width, height),
+                    (True, False),
+                )
+                tiled_map.draw_at(
                     self.predator_sprite_sheet,
                     (6, 6), scale, aspect_ratio,
                     pg.Rect(0, height, width, height)
@@ -109,7 +115,7 @@ class Manager:
 
     def draw_herbivores(self, tiled_map: TiledMap):
         st = Herbivore.State
-        aspect_ratio = 21 / 16
+        aspect_ratio = 1.5
         width = 48
         height = 32
         scale = 1.5

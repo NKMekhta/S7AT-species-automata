@@ -7,10 +7,11 @@ from automata.manager import Manager
 
 def main():
     pg.init()
-    screen = pg.display.set_mode((768, 512),  RESIZABLE)
+    pg.display.set_mode((128, 128))
     tiled_map = TiledMap('assets/map/map.tmx')
     screen = pg.display.set_mode(tiled_map.px_size * 1.5)
     manager = Manager()
+    manager.draw_plot()
 
     running = True
     clock = pg.time.Clock()
@@ -20,11 +21,6 @@ def main():
             match event.type:
                 case pg.QUIT:
                     running = False
-                # case pg.locals.VIDEORESIZE:
-                #     screen = pg.display.set_mode((
-                #         event.size[0],
-                #         event.size[0] / tiled_map.aspect_ratio
-                #     ), RESIZABLE)
                 case pg.KEYDOWN:
                     if event.key == pg.K_SPACE:
                         manager.tick()
