@@ -221,9 +221,9 @@ class Manager:
     def draw_data(self, surface: pg.Surface, rect: pg.Rect):
         try:
             img = pg.image.load('tmp.png')
-            size = rect.size - Vector2(200, 0)
-            dest = Vector2(rect.x + 200, rect.y)
-            surface.blit(pg.transform.scale(img, size), dest)
+            size = rect.size - Vector2(rect.width * 0.2, 0)
+            dest = Vector2(rect.x + rect.width * 0.2, rect.y)
+            surface.blit(img, dest)
         except:
             pass
         font = pg.font.Font()
@@ -245,6 +245,5 @@ class Manager:
             s: {self.scavenger.saturation}
             p: {self.scavenger.population}'''
         render = font.render(text, False, (255, 255, 255, 255))
-        size = Vector2(190, rect.height - 100)
         dest = Vector2(rect.x, rect.y)
-        surface.blit(pg.transform.scale(render, size), dest)
+        surface.blit(render, dest)
