@@ -40,6 +40,7 @@ class Scavenger:
         self.energy: int = self.config[self.Config.INITIAL_ENERGY]
         self.state: Scavenger.State = self.config[self.Config.INITIAL_STATE]
         self.internal_params: dict[Scavenger.PrivateParam, bool] = {}
+        self.__update_internals()
 
     def update(self, input_params: dict[SharedParam, bool]):
         self.__update_internals()
@@ -97,7 +98,7 @@ class Scavenger:
                 self.saturation += 40
                 self.population -= 2
             case self.State.MULTIPLYING:
-                self.population += 5
+                self.population += 8
                 self.energy -= 30
                 self.saturation -= 30
             case self.State.WANDERING:

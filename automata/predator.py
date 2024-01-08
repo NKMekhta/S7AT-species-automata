@@ -53,6 +53,7 @@ class Predator:
         self.energy: int = self.config[self.Config.INITIAL_ENERGY]
         self.state: Predator.State = self.config[self.Config.INITIAL_STATE]
         self.internal_params: dict[Predator.PrivateParam, bool] = {}
+        self.__update_internals()
 
     def update(self, input_params: dict[SharedParam, bool]):
         self.__update_internals()

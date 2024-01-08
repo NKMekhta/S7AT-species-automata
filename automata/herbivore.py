@@ -41,6 +41,7 @@ class Herbivore:
         self.energy: int = self.config[self.Config.INITIAL_ENERGY]
         self.state: Herbivore.State = self.config[self.Config.INITIAL_STATE]
         self.internal_params: dict[Herbivore.PrivateParam, bool] = {}
+        self.__update_internals()
 
     def update(self, input_params: dict[SharedParam, bool]):
         self.__update_internals()
@@ -88,16 +89,18 @@ class Herbivore:
                 self.saturation -= 20
                 self.population -= 3
             case self.State.MULTIPLYING:
-                self.population += 6
+                self.population += 4
                 self.energy -= 30
                 self.saturation -= 20
             case self.State.ESCAPING:
-                self.population -= 10
+                self.population -= 12
                 self.energy -= 20
                 self.saturation -= 10
 
     def get_output(self) -> dict[SharedParam, bool]:
+        ip = self.internal_params
+        pp = self.PrivateParam
         return {
-            SharedParam.HERBIVORES_WILL_DEFEND: self.energy >= 60,
+            SharedParam.HERBIVORES_WILL_DEFEND: ip[pp.HAS_ENERGY_TO_DEFEND],
             SharedParam.HERBIVORES_AVAILABLE: self.population > self.config[self.Config.AVAILABILITY_THRESHOLD],
         }

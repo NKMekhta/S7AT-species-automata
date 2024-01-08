@@ -84,7 +84,7 @@ class Manager:
             case st.HUNTING_HERBIVORES:
                 tiled_map.draw_at(
                     self.predator_sprite_sheet,
-                    (8, 8), scale, aspect_ratio,
+                    (6, 12), scale, aspect_ratio,
                     pg.Rect(0, 0, width, height),
                 )
             case st.HUNTING_SCAVENGERS:
