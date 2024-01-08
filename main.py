@@ -9,7 +9,7 @@ def main():
     pg.init()
     pg.display.set_mode((128, 128))
     tiled_map = TiledMap('assets/map/map.tmx')
-    screen = pg.display.set_mode(tiled_map.px_size * 1.5 + Vector2(0, 500), pg.FULLSCREEN)
+    screen = pg.display.set_mode(tiled_map.px_size * 2 + Vector2(0, 500), pg.FULLSCREEN)
     map_size = screen.get_rect().size - Vector2(0, 500)
     manager = Manager()
     manager.update_plot()

@@ -72,14 +72,14 @@ class Manager:
             case st.INTERNAL_CONFLICT:
                 tiled_map.draw_at(
                     self.predator_sprite_sheet,
-                    (2, 2), scale, aspect_ratio,
+                    (1, 3), scale, aspect_ratio,
                     pg.Rect(0, 0, width, height),
+                    (True, False)
                 )
                 tiled_map.draw_at(
                     self.predator_sprite_sheet,
-                    (3, 3), scale, aspect_ratio,
+                    (3, 1), scale, aspect_ratio,
                     pg.Rect(0, 0, width, height),
-                    (True, False)
                 )
             case st.HUNTING_HERBIVORES:
                 tiled_map.draw_at(
@@ -221,29 +221,30 @@ class Manager:
     def draw_data(self, surface: pg.Surface, rect: pg.Rect):
         try:
             img = pg.image.load('tmp.png')
-            size = rect.size - Vector2(rect.width * 0.2, 0)
-            dest = Vector2(rect.x + rect.width * 0.2, rect.y)
+            dest = Vector2(surface.get_size()[0] - img.get_size()[0], rect.y)
             surface.blit(img, dest)
         except:
             pass
-        font = pg.font.Font()
-        text = f'''
-        Tick {self.counter}
-        Predator: 
-            {self.predator.state}
-            e: {self.predator.energy}
-            s: {self.predator.saturation}
-            p: {self.predator.population}
-        Herbivore 
-            {self.herbivore.state}
-            e: {self.herbivore.energy}
-            s: {self.herbivore.saturation}
-            p: {self.herbivore.population}
-        Scavenger 
-            {self.scavenger.state}
-            e: {self.scavenger.energy}
-            s: {self.scavenger.saturation}
-            p: {self.scavenger.population}'''
+
+        font = pg.font.Font(size=28)
+        text = (
+            f'\nTick {self.counter}'
+            + '\nPredator:'
+            + f'\n    {self.predator.state}'
+            + f'\n    e: {self.predator.energy}'
+            + f'\n    s: {self.predator.saturation}'
+            + f'\n    p: {self.predator.population}'
+            + '\nHerbivore'
+            + f'\n    {self.herbivore.state}'
+            + f'\n    e: {self.herbivore.energy}'
+            + f'\n    s: {self.herbivore.saturation}'
+            + f'\n    p: {self.herbivore.population}'
+            + '\nScavenger'
+            + f'\n    {self.scavenger.state}'
+            + f'\n    e: {self.scavenger.energy}'
+            + f'\n    s: {self.scavenger.saturation}'
+            + f'\n    p: {self.scavenger.population}'
+        )
         render = font.render(text, False, (255, 255, 255, 255))
         dest = Vector2(rect.x, rect.y)
         surface.blit(render, dest)
