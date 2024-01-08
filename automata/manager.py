@@ -1,5 +1,7 @@
 import pygame as pg
 import matplotlib.pyplot as plt
+from pygame import Vector2
+
 from automata.predator import Predator
 from automata.herbivore import Herbivore
 from automata.scavenger import Scavenger
@@ -33,23 +35,7 @@ class Manager:
         self.herbivore_history.pop(0)
 
         print(
-            f'''
-            Tick {self.counter}
-            Predator: 
-                {self.predator.state}
-                E: {self.predator.energy}
-                S: {self.predator.saturation}
-                P: {self.predator.population}
-            Herbivore 
-                {self.herbivore.state}
-                E: {self.herbivore.energy}
-                S: {self.herbivore.saturation}
-                P: {self.herbivore.population}
-            Scavenger 
-                {self.scavenger.state}
-                E: {self.scavenger.energy}
-                S: {self.scavenger.saturation}
-                P: {self.scavenger.population}'''
+
         )
 
     def draw_predators(self, tiled_map: TiledMap):
@@ -66,12 +52,6 @@ class Manager:
                     pg.Rect(0, height * 2, width, height)
                 )
             case st.EATING:
-                tiled_map.draw_at(
-                    self.herbivore_sprite_sheet,
-                    (5.2, 7.2), 1.5, 1.5,
-                    pg.Rect(0, height * 3, width, height),
-                    (True, False),
-                )
                 tiled_map.draw_at(
                     self.predator_sprite_sheet,
                     (6, 6), scale, aspect_ratio,
@@ -226,9 +206,40 @@ class Manager:
                     pg.Rect(0, height * 2, width, height),
                 )
 
-    def draw_plot(self):
+    def update_plot(self):
         plt.clf()
         plt.plot(range(self.counter, self.counter + 16), self.scavenger_history, color='blue', label='Scavengers')
         plt.plot(range(self.counter, self.counter + 16), self.herbivore_history, color='green', label='Herbivores')
         plt.plot(range(self.counter, self.counter + 16), self.predator_history, color='red', label='Predators')
         plt.savefig('tmp')
+
+    def draw_data(self, surface: pg.Surface, rect: pg.Rect):
+        try:
+            img = pg.image.load('tmp.png')
+            size = rect.size - Vector2(200, 0)
+            dest = Vector2(rect.x + 200, rect.y)
+            surface.blit(pg.transform.scale(img, size), dest)
+        except:
+            pass
+        font = pg.font.Font()
+        text = f'''
+        Tick {self.counter}
+        Predator: 
+            {self.predator.state}
+            e: {self.predator.energy}
+            s: {self.predator.saturation}
+            p: {self.predator.population}
+        Herbivore 
+            {self.herbivore.state}
+            e: {self.herbivore.energy}
+            s: {self.herbivore.saturation}
+            p: {self.herbivore.population}
+        Scavenger 
+            {self.scavenger.state}
+            e: {self.scavenger.energy}
+            s: {self.scavenger.saturation}
+            p: {self.scavenger.population}'''
+        render = font.render(text, False, (255, 255, 255, 255))
+        size = Vector2(190, rect.height - 100)
+        dest = Vector2(rect.x, rect.y)
+        surface.blit(pg.transform.scale(render, size), dest)

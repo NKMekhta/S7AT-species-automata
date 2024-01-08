@@ -60,7 +60,10 @@ class Predator:
         pp = self.PrivateParam
         sp = SharedParam
         st = self.State
-        hunt_state = st.HUNTING_HERBIVORES if ip[pp.HUNT_ACTIVELY] else st.HUNTING_SCAVENGERS
+        if ip[pp.HUNT_ACTIVELY] and input_params[sp.HERBIVORES_AVAILABLE]:
+            hunt_state = st.HUNTING_HERBIVORES
+        else:
+            hunt_state = st.HUNTING_SCAVENGERS
         post_hunt_state = {
             ip[pp.HUNT_AGAIN]: hunt_state,
             ip[pp.MULTIPLY_AFTER_HUNT]: st.MULTIPLYING,

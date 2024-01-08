@@ -25,6 +25,7 @@ class Herbivore:
         SHOULD_SLEEP = 1
         SHOULD_GRAZE = 2
         SHOULD_MULTIPLY = 3
+        OVERCROWDING = 4
 
     config: dict[Config, Any] = {
         Config.INITIAL_SATURATION: 100,
@@ -56,7 +57,7 @@ class Herbivore:
         else:
             self.state = {
                 ip[pp.SHOULD_GRAZE]: st.EATING,
-                ip[pp.SHOULD_MULTIPLY]: st.MULTIPLYING,
+                ip[pp.SHOULD_MULTIPLY] and not ip[pp.OVERCROWDING]: st.MULTIPLYING,
                 ip[pp.SHOULD_SLEEP]: st.SLEEPING,
             }.setdefault(True, st.MIGRATING)
         self.__update_variables()
@@ -68,6 +69,7 @@ class Herbivore:
         ip[pp.SHOULD_GRAZE] = self.energy >= 10 and self.saturation < 60
         ip[pp.SHOULD_SLEEP] = self.energy < 10
         ip[pp.SHOULD_MULTIPLY] = self.energy >= 30 and 60 <= self.saturation <= 100
+        ip[pp.OVERCROWDING] = self.population >= self.config[self.Config.AVAILABILITY_THRESHOLD] * 10
         self.internal_params = ip
 
     def __update_variables(self):
