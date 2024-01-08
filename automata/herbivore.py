@@ -102,5 +102,5 @@ class Herbivore:
         pp = self.PrivateParam
         return {
             SharedParam.HERBIVORES_WILL_DEFEND: ip[pp.HAS_ENERGY_TO_DEFEND],
-            SharedParam.HERBIVORES_AVAILABLE: self.population > self.config[self.Config.AVAILABILITY_THRESHOLD],
+            SharedParam.HERBIVORES_AVAILABLE: self.population >= self.config[self.Config.AVAILABILITY_THRESHOLD],
         }
